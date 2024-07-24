@@ -1,5 +1,6 @@
+import Editor from "../components/editor/editor"
 export default function AdventureDashboard(){
     return (
-        <div>testing adventure dashboard</div>
+        <div><Editor /> </div>
     )
 }
