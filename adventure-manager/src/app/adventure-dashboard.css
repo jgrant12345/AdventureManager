@@ -1,0 +1,36 @@
+.AdventureDashboardContainer {
+    display: grid;
+    width: 100 vw;
+    height: 100vh;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 0.5fr 1fr 0.5fr;
+    gap: 20px;
+  }
+  #editorContainer {
+    background-color: white;
+    padding: 40px 20px 100px;
+    border-radius: 5px;
+    grid-column: 2 / 2;
+    grid-row: 2 / 3;
+  }
+  #editor {
+    background-color: rgb(227, 227, 227);
+    height: 400px;
+    overflow: scroll;
+    margin-top: 15px;
+  }
+  #metadata {
+    grid-area: metadata;
+    background-color: yellow;
+  }
+  
+  #AdventureDetailsPanel {
+      grid-column: 3 / 3;
+      grid-row: 2 / 3;
+  }
+  
+  #AdventureDetailsPanel{
+    height: 100%;
+    background-color: white;
+  }
+  
