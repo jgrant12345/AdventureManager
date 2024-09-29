@@ -4,14 +4,10 @@ import './app.css'
 const Editor = dynamic(() => import('./components/editor/editor'), {
   ssr: false,
 })
-
-
 import "./adventure-dashboard.css"
 import AdventureDetailsPanel from "./components/adventure-details/AdventureDetailsPanel";
 import { useEffect, useState } from "react";
 export default function AdventureDashboard() {
-
-
 
   
   return (
