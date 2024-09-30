@@ -1,24 +1,21 @@
-// pages/api/query.js (for Next.js Pages Router)
+// src/app/api/hello/route.js
 import { Pool } from 'pg';
 
+// Set up the database connection using environment variables
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL, // Using the environment variable for security
+  connectionString: process.env.DATABASE_URL, // Ensure your DATABASE_URL is set in Vercel
 });
 
-export default async function GET(req, res) {
+export async function GET(request, response) {
   try {
     const client = await pool.connect();
-    
-    // Sample SQL query to get data from a 'users' table
-    const result = await client.query('SELECT * FROM users;');
-    
-    // Close the client connection
+    const result = await client.query('SELECT * FROM Test;');
     client.release();
-
+    
     // Return the data as JSON
-    res.status(200).json(result.rows);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Error executing query' });
+    return response.status(200).JSON(results.rows);
+  } catch (error) {
+    console.error(error);
+    return new Response('Error fetching data', { status: 500 });
   }
 }
