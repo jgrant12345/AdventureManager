@@ -5,12 +5,12 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL, // Using the environment variable for security
 });
 
-export default async function handler(req, res) {
+export default async function GET(req, res) {
   try {
     const client = await pool.connect();
     
     // Sample SQL query to get data from a 'users' table
-    const result = await client.query('SELECT * FROM Test;');
+    const result = await client.query('SELECT * FROM users;');
     
     // Close the client connection
     client.release();
