@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from "react";
 import { MonsterList } from "../MonsterList/MonsterList";
-import { Encounter, IEncounterList } from "@/app/types/Ecounter";
+import { Encounter, IEncounterList } from "@/types/Ecounter";
 
 
 
