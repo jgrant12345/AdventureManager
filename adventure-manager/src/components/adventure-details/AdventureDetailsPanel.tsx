@@ -2,13 +2,14 @@
 import { useState } from "react";
 import "./AdventureDetailsPanel.css";
 import { EncountersPane } from "../encounters-pane/encounters-pane";
+import React from "react";
 
 interface IDetailsPaneHeader {
   Title: string;
   isActive: boolean;
 }
 
-let DetailsPanelHeader: IDetailsPaneHeader[] = [
+const DetailsPanelHeader: IDetailsPaneHeader[] = [
   { Title: "Encounters", isActive: true },
   { Title: "Party Members", isActive: false },
 ];

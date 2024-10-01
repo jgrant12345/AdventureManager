@@ -1,29 +1,17 @@
 "use client"
-import React, { useState } from "react";
+import React from "react";
 import { MonsterList } from "../MonsterList/MonsterList";
-import { Encounter, IEncounterList } from "@/types/Ecounter";
+import { IEncounterList } from "../../types/Ecounter";
 
 
 
-export const EncountersPane: React.FC<IEncounterList> = ({ EncounterList }) => {
-  const [encounterList, setEncounterList] = useState<Encounter[]>(EncounterList);
 
-  async function addEncounter() {
-    try {
-       
-        // setEncounterList([...encounterList, newEncounter ])
-    } catch {
-
-    }
-  }
+export const EncountersPane: React.FC<IEncounterList> = ({ EncounterList } : IEncounterList) => {
 
   return (
     <>
-    <button onClick={addEncounter}>add Encounter</button>
-      {encounterList.map((encounter, index) => {
-        return <div key={index}>{encounter.EncounterName}</div>;
-      })}
-      <MonsterList />
+          
+      <MonsterList EncounterList={EncounterList}  />
       
     </>
   );
