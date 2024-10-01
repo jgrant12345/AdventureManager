@@ -2,33 +2,39 @@
 import React, { ChangeEvent, useState } from "react";
 import { Encounter, IEncounterList } from "../../types/Ecounter";
 
-export const MonsterList: React.FC<IEncounterList> = ({EncounterList} : IEncounterList) => {
-
-  const [encounterList, setEncounterList] = useState<Encounter[]>(EncounterList);
+export const MonsterList: React.FC<IEncounterList> = ({
+  EncounterList,
+}: IEncounterList) => {
+  const [encounterList, setEncounterList] =
+    useState<Encounter[]>(EncounterList);
   const [EncounterName, setEncounterName] = useState<string>("");
 
-   function addEncounter() {
+  function addEncounter(e) {
     try {
-      const newEncounter : Encounter = {EncounterName: EncounterName};
-      setEncounterList([...encounterList, newEncounter ]);
+      e.preventDefault();
+      const newEncounter: Encounter = { EncounterName: EncounterName };
+      setEncounterList([...encounterList, newEncounter]);
       setEncounterName("");
-
-    }  catch {
-      console.log("error")
+    } catch {
+      console.log("error");
     }
   }
 
   return (
     <div>
       {" "}
-      <input
-        value={EncounterName}
-        onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          setEncounterName(e.target.value)
-        }
-      ></input>
-      <button onClick={addEncounter}>add Encounter</button>
-      {encounterList.map((encounter : Encounter, index: number) => {
+      <form onSubmit={addEncounter}>
+        <label htmlFor="AddMonsterInput">Add Monster</label>
+        <input
+          id="AddMonsterInput"
+          value={EncounterName}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setEncounterName(e.target.value)
+          }
+        ></input>
+        <button type="submit">add Encounter</button>
+      </form>
+      {encounterList.map((encounter: Encounter, index: number) => {
         return <div key={index}>{encounter.EncounterName}</div>;
       })}
     </div>
