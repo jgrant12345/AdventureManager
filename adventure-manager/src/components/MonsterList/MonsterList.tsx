@@ -9,7 +9,7 @@ export const MonsterList: React.FC<IEncounterList> = ({
     useState<Encounter[]>(EncounterList);
   const [EncounterName, setEncounterName] = useState<string>("");
 
-  function addEncounter(e) {
+  function addEncounter(e : React.FormEvent<HTMLInputElement>) {
     try {
       e.preventDefault();
       const newEncounter: Encounter = { EncounterName: EncounterName };
