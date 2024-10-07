@@ -1,0 +1,8 @@
+.EncounterContainer{
+    overflow: scroll;
+    height: 500px;
+}
+
+.EncounteryEntry{
+    margin-top: 8px;
+}

@@ -1,12 +1,13 @@
 "use client";
 import React, { ChangeEvent, useState } from "react";
 import { Encounter, IEncounterList } from "../../types/Ecounter";
+import "./MonsterList.css"
 
-export const MonsterList: React.FC<IEncounterList> = ({
-  EncounterList,
+export const EncounterList: React.FC<IEncounterList> = ({
+  IEncountersList,
 }: IEncounterList) => {
   const [encounterList, setEncounterList] =
-    useState<Encounter[]>(EncounterList);
+    useState<Encounter[]>(IEncountersList);
   const [EncounterName, setEncounterName] = useState<string>("");
 
   function addEncounter(e : React.FormEvent<HTMLFormElement>) {
@@ -33,10 +34,11 @@ export const MonsterList: React.FC<IEncounterList> = ({
           }
         ></input>
         <button type="submit">add Encounter</button>
-      </form>
+      </form><div className="EncounterContainer">
       {encounterList.map((encounter: Encounter, index: number) => {
-        return <div key={index}>{encounter.EncounterName}</div>;
+        return <div className="EncounteryEntry" key={index}>{encounter.EncounterName}</div>;
       })}
+      </div>
     </div>
   );
 };

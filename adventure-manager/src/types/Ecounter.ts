@@ -1,5 +1,5 @@
 export interface IEncounterList {
-    EncounterList: Encounter[];
+    IEncountersList: Encounter[];
   }
   
   export interface Encounter {

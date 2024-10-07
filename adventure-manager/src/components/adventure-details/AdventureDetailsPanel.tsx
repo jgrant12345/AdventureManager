@@ -45,7 +45,7 @@ const AdventureDetailsPanel: React.FC = () => {
             );
           })}
         </div>
-        {detailPanelHeader[0].isActive && <EncountersPane EncounterList={[{EncounterName:"First Boss"}, {EncounterName:"Second boss"}]}/>}
+        {detailPanelHeader[0].isActive && <EncountersPane IEncountersList={[{EncounterName:"First Boss"}, {EncounterName:"Second boss"}]}/>}
       </div>
     </>
   );
