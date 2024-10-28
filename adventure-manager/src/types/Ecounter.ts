@@ -1,8 +1,12 @@
-export interface IEncounterList {
-    IEncountersList: Encounter[];
+import { FormEvent } from "react";
+
+export interface IEncounterPane {
+      EncountersList: Encounter[];
+      AddEncounter: (event: any, Encounter: string) => void
   }
   
   export interface Encounter {
+    id: number,
     EncounterName: string;
   }
 

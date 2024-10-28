@@ -1,8 +1,9 @@
-"use client"
-import { useState } from "react";
+"use client";
+import { useState, createContext, useEffect } from "react";
 import "./AdventureDetailsPanel.css";
 import { EncountersPane } from "../encounters-pane/encounters-pane";
 import React from "react";
+import { Encounter } from "@/types/Ecounter";
 
 interface IDetailsPaneHeader {
   Title: string;
@@ -14,9 +15,16 @@ const DetailsPanelHeader: IDetailsPaneHeader[] = [
   { Title: "Party Members", isActive: false },
 ];
 
+export const encounterContext = createContext<any>(null);
+
 const AdventureDetailsPanel: React.FC = () => {
   const [detailPanelHeader, setDetailPanelHeader] =
     useState(DetailsPanelHeader);
+  const [encounterList, setEncounterList] = useState<Encounter[]>([
+    { EncounterName: "First Boss", id: 2 },
+    { EncounterName: "Second boss", id: 3 },
+  ]);
+
   function updateActiveHeader(id: number) {
     const newDetailsPanelHeader = detailPanelHeader.map(
       (prevPanelHeader, index) =>
@@ -24,8 +32,43 @@ const AdventureDetailsPanel: React.FC = () => {
           ? { ...prevPanelHeader, isActive: true }
           : { ...prevPanelHeader, isActive: false }
     );
+
     setDetailPanelHeader(newDetailsPanelHeader);
   }
+
+  async function addEncounter(
+    event: React.FormEvent<HTMLFormElement>,
+    Encounter: string
+  ) {
+    event.preventDefault();
+    try {
+      const response = await fetch(`/api/encounters`, {
+        method: "POST",
+        body: JSON.stringify({ Encounter: Encounter }),
+      });
+      const responsejson: Encounter[] = await response.json();
+      console.log(responsejson);
+      const id = responsejson[0].id; // there is only one row we're returning
+      console.log(id);
+      setEncounterList([
+        ...encounterList,
+        { EncounterName: Encounter, id: id },
+      ]);
+    } catch (error) {}
+  }
+
+  useEffect(() => {
+    async function fetchEncounters() {
+      try {
+        const response = await fetch("api/encounters");
+      } catch (error) {
+        console.log("error getting encounters");
+      }
+    }
+
+    fetchEncounters();
+  });
+
   return (
     <>
       <div>
@@ -45,7 +88,13 @@ const AdventureDetailsPanel: React.FC = () => {
             );
           })}
         </div>
-        {detailPanelHeader[0].isActive && <EncountersPane IEncountersList={[{EncounterName:"First Boss"}, {EncounterName:"Second boss"}]}/>}
+
+        {detailPanelHeader[0].isActive && (
+          <EncountersPane
+            EncountersList={encounterList}
+            AddEncounter={addEncounter}
+          />
+        )}
       </div>
     </>
   );
