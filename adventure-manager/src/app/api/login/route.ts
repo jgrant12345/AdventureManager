@@ -1,7 +1,6 @@
 // /app/api/auth/token/route.js or /app/api/auth/token/route.ts
 import jwt from "jsonwebtoken";
 
-import { process } from "../../../types/EnvironmentalVariables"
 
 export async function POST(request: Request, response : Response) {
   //   const { userId } = await request.json(); // Assuming `userId` is passed in the request body
@@ -10,7 +9,6 @@ export async function POST(request: Request, response : Response) {
   const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
     expiresIn: "1h", // Token will expire in 1 hour
   });
-  console.log("what")
   return new Response(JSON.stringify({ token }), {
     status: 200,
     headers: {
