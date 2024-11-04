@@ -1,8 +1,3 @@
-export declare var process: {
-  env: {
-    JWT_SECRET: string;
-  };
-};
 // /app/api/auth/token/route.js or /app/api/auth/token/route.ts
 import jwt from "jsonwebtoken";
 
@@ -22,3 +17,8 @@ export async function POST(request: Request, response : Response) {
     },
   });
 }
+export declare var process: {
+  env: {
+    JWT_SECRET: string;
+  };
+};
