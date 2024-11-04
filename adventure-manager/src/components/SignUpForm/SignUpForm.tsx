@@ -1,3 +1,7 @@
 export default function SignUpForm(){
-    return (<div>SignUpForm</div>)
+
+
+
+    
+    return (<div><button>signup</button></div>)
 }
