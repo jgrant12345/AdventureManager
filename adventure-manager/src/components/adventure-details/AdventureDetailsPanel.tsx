@@ -21,8 +21,8 @@ const AdventureDetailsPanel: React.FC = () => {
   const [detailPanelHeader, setDetailPanelHeader] =
     useState(DetailsPanelHeader);
   const [encounterList, setEncounterList] = useState<Encounter[]>([
-    { EncounterName: "First Boss", id: 2 },
-    { EncounterName: "Second boss", id: 3 },
+    { title: "First Boss", id: 2 },
+    { title: "Second boss", id: 3 },
   ]);
 
   function updateActiveHeader(id: number) {
@@ -47,13 +47,10 @@ const AdventureDetailsPanel: React.FC = () => {
         body: JSON.stringify({ Encounter: Encounter }),
       });
       const responsejson: Encounter[] = await response.json();
-      console.log(responsejson);
+
       const id = responsejson[0].id; // there is only one row we're returning
-      console.log(id);
-      setEncounterList([
-        ...encounterList,
-        { EncounterName: Encounter, id: id },
-      ]);
+
+      setEncounterList([...encounterList, { title: Encounter, id: id }]);
     } catch (error) {}
   }
 
@@ -61,13 +58,15 @@ const AdventureDetailsPanel: React.FC = () => {
     async function fetchEncounters() {
       try {
         const response = await fetch("api/encounters");
+        const encounters: Encounter[] = await response.json();
+        setEncounterList(encounters);
       } catch (error) {
         console.log("error getting encounters");
       }
     }
 
     fetchEncounters();
-  });
+  }, []);
 
   return (
     <>

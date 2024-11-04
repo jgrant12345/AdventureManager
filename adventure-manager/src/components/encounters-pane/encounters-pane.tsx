@@ -29,7 +29,7 @@ export const EncountersPane: React.FC<IEncounterPane> = ({
       {EncountersList.map((Encounter, index) => {
         return (
           <div key={index}>
-            <button className="encounterButton">{Encounter.EncounterName}</button>
+            <button className="encounterButton">{Encounter.title}</button>
           </div>
         );
       })}

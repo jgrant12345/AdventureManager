@@ -7,7 +7,7 @@ export interface IEncounterPane {
   
   export interface Encounter {
     id: number,
-    EncounterName: string;
+    title: string;
   }
 
   export interface IEncounterAction{
