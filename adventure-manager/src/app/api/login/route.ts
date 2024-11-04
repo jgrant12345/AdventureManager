@@ -17,8 +17,4 @@ export async function POST(request: Request, response : Response) {
     },
   });
 }
-export declare var process: {
-  env: {
-    JWT_SECRET: string;
-  };
-};
+
