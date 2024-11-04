@@ -1,4 +1,4 @@
-export declare var process: {
+export var process: {
     env: {
       JWT_SECRET: string;
     };
