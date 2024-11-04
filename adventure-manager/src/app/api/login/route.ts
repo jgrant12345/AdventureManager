@@ -1,6 +1,8 @@
 // /app/api/auth/token/route.js or /app/api/auth/token/route.ts
 import jwt from "jsonwebtoken";
 
+import { process } from "../../../types/EnvironmentalVariables"
+
 export async function POST(request: Request, response : Response) {
   //   const { userId } = await request.json(); // Assuming `userId` is passed in the request body
   const userId = 41;
