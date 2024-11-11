@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@clerk/nextjs": "^6.3.0",
     "@mdxeditor/editor": "^3.11.5",
     "@vercel/postgres": "^0.10.0",
     "jsonwebtoken": "^9.0.2",
