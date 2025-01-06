@@ -1,0 +1,33 @@
+CREATE TABLE users(
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(40),
+    password_hash Text,
+    email VARCHAR(40)
+);
+
+CREATE TABLE adventure_session(
+   id SERIAL PRIMARY KEY,
+   title VARCHAR (50),
+   user_id INTEGER REFERENCES users(id)
+)
+
+CREATE TABLE user_notes(
+    blob_url Text,
+    Id SERIAL PRIMARY KEY,
+    AdventureSessionID INTEGER REFERENCES adventure_session(Id)
+)
+
+CREATE TABLE encounter(
+   Id SERIAL PRIMARY KEY,
+   encountername VARCHAR (75),
+   AdventureSessionID INTEGER REFERENCES adventure_session(Id)
+)
+
+CREATE TABLE Monster(
+   Id SERIAL PRIMARY KEY,
+   Name VARCHAR(75),
+   Level INTEGER,
+   Health INTEGER,
+   ArmorClass Integer,
+   EncounterID INTEGER REFERENCES encounter(Id)
+)
