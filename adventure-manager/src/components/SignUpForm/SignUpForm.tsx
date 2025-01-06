@@ -1,15 +1,27 @@
+'use client'
 import { FormEvent, useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
-export default function SignUpForm() {
+
+export const SignUpForm : React.FC = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter(); // Initialize the useRouter hook
   const signup = async (e: FormEvent<HTMLFormElement>) => {
-   e.preventDefault();
-   const response = await axios.post('/api/signup', {
-    userName: userName,
-    password: password
-  });
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("/api/signup", {
+        userName: userName,
+        password: password,
+      });
+      if(response.status === 201){
+        router.push("/")
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <form onSubmit={signup}>

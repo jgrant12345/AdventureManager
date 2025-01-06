@@ -12,9 +12,9 @@ export async function POST(request: Request, response : Response) {
   return new Response(JSON.stringify({ token }), {
     status: 200,
     headers: {
-      "Content-Type": "application/json",
-      "Set-Cookie": `login-cookie=${token}; Path=/; HTTPOnly; Secure; SameSite=Strict`
-    },
+    "Content-Type": "application/json",
+    "Set-Cookie": `login-cookie=${token}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=3600`
+  },
   });
 }
 
