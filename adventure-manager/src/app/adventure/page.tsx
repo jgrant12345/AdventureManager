@@ -7,12 +7,11 @@ const Editor = dynamic(() => import("../../components/editor/editor"), {
 });
 import "../adventure-dashboard.css";
 import AdventureDetailsPanel from "../../components/adventure-details/AdventureDetailsPanel";
-import React, { createContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 
 
-export const EncounterContext = createContext<number>(0);
 export default function AdventureDashboard() {
   const [adventure_sessions, setAdventureSessions] = useState<
     IAdventureSession[]
