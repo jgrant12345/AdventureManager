@@ -17,7 +17,7 @@ export default function AdventureDashboard() {
   const [adventure_sessions, setAdventureSessions] = useState<
     IAdventureSession[]
   >([]);
-  const [selectedAdventure_session, setSelectedAdventure_session] = useState<number>(0);
+  const [selectedAdventure_session, setSelectedAdventure_session] = useState<number>(1);
  
 
 
@@ -45,7 +45,7 @@ export default function AdventureDashboard() {
           </div>
         </main>
         <div id="AdventureDetailsPanel">
-          <AdventureDetailsPanel selectedAdventureSession = {0} />
+          <AdventureDetailsPanel selectedAdventureSession = {selectedAdventure_session} />
         </div>
       </div>
   );

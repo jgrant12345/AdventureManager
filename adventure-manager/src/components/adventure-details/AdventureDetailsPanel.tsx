@@ -70,7 +70,7 @@ const AdventureDetailsPanel: React.FC<IAdventureDetailsPanel> = ({selectedAdvent
     }
 
     fetchEncounters();
-  }, [selected_adventure_session]);
+  }, []);
 
   return (
     <>
