@@ -1,5 +1,5 @@
 "use client";
-import { useState, createContext, useEffect, useContext } from "react";
+import { useState, createContext, useEffect } from "react";
 import "./AdventureDetailsPanel.css";
 import { EncountersPane } from "../encounters-pane/encounters-pane";
 import React from "react";
@@ -12,20 +12,22 @@ interface IDetailsPaneHeader {
   isActive: boolean;
 }
 
+interface IAdventureDetailsPanel {
+  selectedAdventureSession: number
+}
+
 const DetailsPanelHeader: IDetailsPaneHeader[] = [
   { Title: "Encounters", isActive: true },
   { Title: "Party Members", isActive: false },
 ];
 
-const AdventureDetailsPanel: React.FC = () => {
+const AdventureDetailsPanel: React.FC<IAdventureDetailsPanel> = ({selectedAdventureSession}) => {
   const [detailPanelHeader, setDetailPanelHeader] =
     useState(DetailsPanelHeader);
   const [encounterList, setEncounterList] = useState<Encounter[]>([
     { title: "First Boss", id: 2 },
     { title: "Second boss", id: 3 },
   ]);
-
-  const selected_adventure_session  = useContext(EncounterContext);
 
   function updateActiveHeader(id: number) {
     const newDetailsPanelHeader = detailPanelHeader.map(
@@ -44,7 +46,7 @@ const AdventureDetailsPanel: React.FC = () => {
   ) {
     event.preventDefault();
     try {
-      const response = await fetch(`/api/encounters?encountersId=${selected_adventure_session}`, {
+      const response = await fetch(`/api/encounters?encountersId=${selectedAdventureSession}`, {
         method: "POST",
         body: JSON.stringify({ Encounter: Encounter }),
       });
@@ -59,7 +61,7 @@ const AdventureDetailsPanel: React.FC = () => {
   useEffect(() => {
     async function fetchEncounters() {
       try {
-        const response = await fetch(`api/encounters?encountersId=${selected_adventure_session}`);
+        const response = await fetch(`api/encounters?encountersId=${selectedAdventureSession}`);
         const encounters: Encounter[] = await response.json();
         setEncounterList(encounters);
       } catch (error) {

@@ -9,7 +9,6 @@ import "../adventure-dashboard.css";
 import AdventureDetailsPanel from "../../components/adventure-details/AdventureDetailsPanel";
 import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
-import { title } from "process";
 
 
 
@@ -33,7 +32,6 @@ export default function AdventureDashboard() {
   }, []);
 
   return (
-    <EncounterContext.Provider value={selectedAdventure_session}>
       <div className="AdventureDashboardContainer">
         <div>testing my header here content</div>
 
@@ -47,9 +45,8 @@ export default function AdventureDashboard() {
           </div>
         </main>
         <div id="AdventureDetailsPanel">
-          <AdventureDetailsPanel />
+          <AdventureDetailsPanel selectedAdventureSession = {0} />
         </div>
       </div>
-    </EncounterContext.Provider>
   );
 }
