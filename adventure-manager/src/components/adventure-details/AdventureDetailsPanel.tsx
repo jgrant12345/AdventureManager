@@ -4,7 +4,6 @@ import "./AdventureDetailsPanel.css";
 import { EncountersPane } from "../encounters-pane/encounters-pane";
 import React from "react";
 import { Encounter } from "@/types/Ecounter";
-import { EncounterContext } from "@/app/adventure/page";
 
 
 interface IDetailsPaneHeader {

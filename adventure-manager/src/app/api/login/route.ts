@@ -2,7 +2,7 @@
 import jwt from "jsonwebtoken";
 
 
-export async function POST(request: Request, response : Response) {
+export async function POST(request: Request) {
   //   const { userId } = await request.json(); // Assuming `userId` is passed in the request body
   const userId = 41;
   // Generate a token with a payload and expiration time

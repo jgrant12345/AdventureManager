@@ -7,7 +7,7 @@ type userBody = {
   password: string;
 };
 
-export async function POST(request: Request, response: Response) {
+export async function POST(request: Request) {
   const body: userBody = await request.json();
 
   if (!body.userName || !body.password) {
