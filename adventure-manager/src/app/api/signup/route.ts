@@ -25,8 +25,11 @@ export async function POST(request: Request, response: Response) {
   INSERT INTO users (username, password, created_at)
   VALUES (${body.userName}, ${hashedPassword}, ${utcString}) RETURNING *;
 `;
+  const { username, id } =  rows[0];
 
-  const { username, id } = rows[0];
+  await sql`
+  INSERT INTO adventure_session (title, user_id)
+  VALUES ('first adventure', ${id});`
 
   // Generate a token with a payload and expiration time
   const token = jwt.sign({ id }, process.env.JWT_SECRET, {

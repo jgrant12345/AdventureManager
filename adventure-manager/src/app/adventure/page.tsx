@@ -1,3 +1,4 @@
+"use client";
 import dynamic from "next/dynamic";
 import "../index.css";
 import "../app.css";
@@ -6,24 +7,49 @@ const Editor = dynamic(() => import("../../components/editor/editor"), {
 });
 import "../adventure-dashboard.css";
 import AdventureDetailsPanel from "../../components/adventure-details/AdventureDetailsPanel";
-import React from "react";
-export default function AdventureDashboard() {
-  return (
-    <div className="AdventureDashboardContainer">
-      <div>testing my header here content</div>
+import React, { createContext, useEffect, useState } from "react";
+import axios from "axios";
+import { title } from "process";
 
-      <main id="editorContainer">
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          Adventure Notes
+
+
+export const EncounterContext = createContext<number>(0);
+export default function AdventureDashboard() {
+  const [adventure_sessions, setAdventureSessions] = useState<
+    IAdventureSession[]
+  >([]);
+  const [selectedAdventure_session, setSelectedAdventure_session] = useState<number>(0);
+ 
+
+
+  useEffect(() => {
+    getEncounters();
+    async function getEncounters() {
+      const response = (
+        await axios.get("/api/adventure_session")
+      );   
+      setSelectedAdventure_session(response.data[0].id);
+    }
+  }, []);
+
+  return (
+    <EncounterContext.Provider value={selectedAdventure_session}>
+      <div className="AdventureDashboardContainer">
+        <div>testing my header here content</div>
+
+        <main id="editorContainer">
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            Adventure Notes
+          </div>
+          <hr></hr>
+          <div id="editor">
+            <Editor />
+          </div>
+        </main>
+        <div id="AdventureDetailsPanel">
+          <AdventureDetailsPanel />
         </div>
-        <hr></hr>
-        <div id="editor">
-          <Editor />
-        </div>
-      </main>
-      <div id="AdventureDetailsPanel">
-        <AdventureDetailsPanel />
       </div>
-    </div>
+    </EncounterContext.Provider>
   );
 }

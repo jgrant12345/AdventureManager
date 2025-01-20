@@ -17,7 +17,7 @@ export const SignUpForm : React.FC = () => {
         password: password,
       });
       if(response.status === 201){
-        router.push("/")
+        router.push("/adventure")
       }
     } catch (error) {
       console.log(error);

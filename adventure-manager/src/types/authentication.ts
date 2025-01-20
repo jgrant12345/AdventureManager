@@ -1,0 +1,3 @@
+interface IJsonToken {
+    id: number
+}

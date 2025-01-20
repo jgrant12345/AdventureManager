@@ -1,9 +1,11 @@
 "use client";
-import { useState, createContext, useEffect } from "react";
+import { useState, createContext, useEffect, useContext } from "react";
 import "./AdventureDetailsPanel.css";
 import { EncountersPane } from "../encounters-pane/encounters-pane";
 import React from "react";
 import { Encounter } from "@/types/Ecounter";
+import { EncounterContext } from "@/app/adventure/page";
+
 
 interface IDetailsPaneHeader {
   Title: string;
@@ -15,8 +17,6 @@ const DetailsPanelHeader: IDetailsPaneHeader[] = [
   { Title: "Party Members", isActive: false },
 ];
 
-export const encounterContext = createContext<any>(null);
-
 const AdventureDetailsPanel: React.FC = () => {
   const [detailPanelHeader, setDetailPanelHeader] =
     useState(DetailsPanelHeader);
@@ -24,6 +24,8 @@ const AdventureDetailsPanel: React.FC = () => {
     { title: "First Boss", id: 2 },
     { title: "Second boss", id: 3 },
   ]);
+
+  const selected_adventure_session  = useContext(EncounterContext);
 
   function updateActiveHeader(id: number) {
     const newDetailsPanelHeader = detailPanelHeader.map(
@@ -42,7 +44,7 @@ const AdventureDetailsPanel: React.FC = () => {
   ) {
     event.preventDefault();
     try {
-      const response = await fetch(`/api/encounters`, {
+      const response = await fetch(`/api/encounters?encountersId=${selected_adventure_session}`, {
         method: "POST",
         body: JSON.stringify({ Encounter: Encounter }),
       });
@@ -57,7 +59,7 @@ const AdventureDetailsPanel: React.FC = () => {
   useEffect(() => {
     async function fetchEncounters() {
       try {
-        const response = await fetch("api/encounters");
+        const response = await fetch(`api/encounters?encountersId=${selected_adventure_session}`);
         const encounters: Encounter[] = await response.json();
         setEncounterList(encounters);
       } catch (error) {
@@ -66,7 +68,7 @@ const AdventureDetailsPanel: React.FC = () => {
     }
 
     fetchEncounters();
-  }, []);
+  }, [selected_adventure_session]);
 
   return (
     <>
